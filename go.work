@@ -1,9 +1,11 @@
 go 1.20
 
 use (
-	./src/go-bookstore
 	./src/go-movies-crud
+	./src/go-bookstore
 	./src/simple-http-server-go
 	./src/slack-age-bot
 	./src/slack-file-bot
+	./src/email-checker-tool
+	./src/lambda-yt-example
 )
