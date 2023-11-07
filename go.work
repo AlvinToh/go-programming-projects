@@ -1,11 +1,11 @@
-go 1.20
+go 1.21
 
 use (
-	./src/go-movies-crud
-	./src/go-bookstore
-	./src/simple-http-server-go
-	./src/slack-age-bot
-	./src/slack-file-bot
-	./src/email-checker-tool
-	./src/lambda-yt-example
+	./go-movies-crud
+	./go-bookstore
+	./simple-http-server-go
+	./slack-age-bot
+	./slack-file-bot
+	./email-checker-tool
+	./lambda-yt-example
 )
