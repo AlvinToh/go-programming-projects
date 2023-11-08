@@ -1,4 +1,4 @@
-module go-bookstore
+module github.com/alvintoh/go-programming-projects/go-bookstore
 
 go 1.21
 

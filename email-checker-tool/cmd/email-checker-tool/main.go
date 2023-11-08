@@ -18,7 +18,7 @@ func main() {
 	}
 
 	if err := scanner.Err(); err != nil {
-		log.Fatal("Error: could not read from input : %v\n", err)
+		log.Fatalf("Error: could not read from input : %v\n", err)
 	}
 
 }
@@ -62,5 +62,5 @@ func checkDomain(domain string) {
 		}
 	}
 
-	fmt.Printf("%v, %v, %v, %v, %v, %v ", domain, hasMX, hasSPF, spfRecord, hasDMARC, dmarcRecord)
+	fmt.Printf("%v, %v, %v, %v, %v, %v\n\n", domain, hasMX, hasSPF, spfRecord, hasDMARC, dmarcRecord)
 }

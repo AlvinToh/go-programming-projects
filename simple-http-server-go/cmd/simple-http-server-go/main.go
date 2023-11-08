@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"simple-http-server-go/internal/app/handler"
+
+	"github.com/alvintoh/go-programming-projects/simple-http-server-go/internal/app/handler"
 )
 
 func main() {

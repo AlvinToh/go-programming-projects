@@ -3,10 +3,12 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"go-bookstore/internal/app/model"
-	"go-bookstore/pkg/util"
 	"net/http"
 	"strconv"
+
+	"github.com/alvintoh/go-programming-projects/go-bookstore/pkg/util"
+
+	"github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/model"
 
 	"github.com/gorilla/mux"
 )

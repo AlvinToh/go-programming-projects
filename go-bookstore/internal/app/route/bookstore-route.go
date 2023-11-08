@@ -1,7 +1,7 @@
 package route
 
 import (
-	"go-bookstore/internal/app/handler"
+	"github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/handler"
 
 	"github.com/gorilla/mux"
 )

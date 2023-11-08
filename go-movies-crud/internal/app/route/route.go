@@ -1,7 +1,7 @@
 package route
 
 import (
-	"go-movies-crud/internal/app/handler"
+	"github.com/alvintoh/go-programming-projects/go-movies-crud/internal/app/handler"
 
 	"github.com/gorilla/mux"
 )

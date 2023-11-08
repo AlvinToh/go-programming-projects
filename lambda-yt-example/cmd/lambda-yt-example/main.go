@@ -3,17 +3,12 @@ package main
 import (
 	"fmt"
 
+	"github.com/alvintoh/go-programming-projects/lambda-yt-example/internal/app/model"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-type MyEvent struct {
-	Name string `json:"what is your name?"`
-	Age  int    `json:"How old are you?"`
-}
-
-type MyResponse struct {
-	Message string `json:"Answer:"`
-}
+type MyEvent = model.MyEvent
+type MyResponse = model.MyResponse
 
 func HandleLambdaEvent(event MyEvent) (MyResponse, error) {
 	return MyResponse{Message: fmt.Sprintf("%s is %d years old!", event.Name, event.Age)}, nil

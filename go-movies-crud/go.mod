@@ -1,4 +1,4 @@
-module go-movies-crud
+module github.com/alvintoh/go-programming-projects/go-movies-crud
 
 go 1.21
 

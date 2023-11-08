@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"go-movies-crud/internal/app/route"
+	"github.com/alvintoh/go-programming-projects/go-movies-crud/internal/app/route"
 
 	"github.com/gorilla/mux"
 )

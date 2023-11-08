@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"go-movies-crud/internal/app/model"
+	"github.com/alvintoh/go-programming-projects/go-movies-crud/internal/app/model"
 
 	"github.com/gorilla/mux"
 )

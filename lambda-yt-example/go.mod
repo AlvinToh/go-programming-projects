@@ -1,4 +1,4 @@
-module github.com/alvintoh/go-programming-projects/go-lambda-function-3
+module github.com/alvintoh/go-programming-projects/lambda-yt-example
 
 go 1.21
 
