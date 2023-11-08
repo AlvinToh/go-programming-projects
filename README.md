@@ -12,7 +12,19 @@ docker-compose -p go-programming-projects -f deployment/docker-compose/docker-co
 ```
 
 ## Run Commands:
-* lambda-yt-example
+Change directory into module directory to init, tidy, build and run go service
+```
+go mod init github.com/XXX
+
+go mod tidy
+
+go build
+
+go run cmd/<service-name>/main.go
+```
+
+lambda-yt-example - Invoke api 
+
 ```
 aws lambda invoke --function-name lambda-yt-example --cli-binary-format raw-in-base64-out --payload '{\"What is your name?\": \"Jim\",\"How old are you?\": 33}' output.txt
 ```

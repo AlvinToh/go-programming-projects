@@ -1,11 +1,12 @@
-go 1.21
+go 1.21.3
 
 use (
-	./go-movies-crud
+	./email-checker-tool
 	./go-bookstore
+	./go-movies-crud
+	./lambda-yt-example
 	./simple-http-server-go
 	./slack-age-bot
 	./slack-file-bot
-	./email-checker-tool
-	./lambda-yt-example
+	./go-fiber-crm-basic
 )
