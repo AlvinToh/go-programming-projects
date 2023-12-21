@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/leads": {
+      "get": {
+        "tags": [
+          "leads"
+        ],
+        "operationId": "getLeads",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/leadsResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "leads"
+        ],
+        "operationId": "newLead",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/leadResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      }
+    },
+    "/leads/{id}": {
+      "get": {
+        "tags": [
+          "leads"
+        ],
+        "operationId": "getLead",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/leadResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "leads"
+        ],
+        "operationId": "deleteLead",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/leadResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Lead": {
+      "type": "object",
+      "properties": {
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "DeletedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ID": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "company": {
+          "type": "string",
+          "x-go-name": "Company"
+        },
+        "email": {
+          "type": "string",
+          "x-go-name": "Email"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "phone": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Phone"
+        }
+      },
+      "x-go-package": "github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/app/model"
+    }
+  },
+  "responses": {
+    "genericError": {
+      "description": "",
+      "headers": {
+        "code": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "leadResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/Lead"
+      }
+    },
+    "leadsResponse": {
+      "description": "",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Lead"
+        }
+      }
+    }
+  }
+}
