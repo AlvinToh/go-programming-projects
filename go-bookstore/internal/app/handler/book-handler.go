@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/alvintoh/go-programming-projects/go-bookstore/pkg/util"
+	"github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/util"
 
 	"github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/model"
 

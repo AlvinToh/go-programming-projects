@@ -11,7 +11,22 @@ To run the database services:
 docker-compose -p go-programming-projects -f deployment/docker-compose/docker-compose-x86.yml --profile databases up -d
 ```
 
+Login to pgadmin4
+```
+localhost:5050
+```
+
+Create connection to existing postgres database inside docker network with docker service name
+```
+postgres
+```
 ## Run Commands:
+Ensure the go version installed is
+
+```
+1.21.3
+```
+
 Change directory into module directory to init, tidy, build and run go service
 ```
 go mod init github.com/XXX
