@@ -18,9 +18,9 @@ func main() {
 	fmt.Println("Database Migrated")
 
 	route.SetupRoutes(app)
-	// Show swagger ui and docs for different handler methods
-	app.Static("/swagger/leads", "./swagger/ui")
-	app.Static("/swagger/leads/swagger.json", "./swagger/leads/swagger.json")
+	// Serve Swagger UI and Swagger JSON
+	app.Static("/swagger/ui", "./swagger/ui")
+	app.Static("/swagger", "./swagger")
 
 	log.Fatal(app.Listen(":3000"))
 	defer database.DBConn.Close()

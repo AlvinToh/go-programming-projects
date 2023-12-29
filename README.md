@@ -44,5 +44,12 @@ lambda-yt-example - Invoke api
 aws lambda invoke --function-name lambda-yt-example --cli-binary-format raw-in-base64-out --payload '{\"What is your name?\": \"Jim\",\"How old are you?\": 33}' output.txt
 ```
 
+go-fiber-crm-basic - Generate swagger json and be displayed by swagger/ui/swagger-initializer.js
+```
+swagger generate spec -o .\swagger\swagger.json
+
+Navigate to http://localhost:3000/swagger/ui/index.html#/ to view your generated swagger ui documentation
+```
+
 ## Tutorial Resources:
 * **[freeCodeCamp](https://www.freecodecamp.org/news/learn-go-by-building-11-projects/)**
