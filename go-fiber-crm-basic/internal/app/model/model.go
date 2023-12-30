@@ -31,13 +31,13 @@ type leadResponseWrapper struct {
 
 // swagger:response genericError
 type genericErrorWrapper struct {
-	code    string `json:"code"`
-	message string `json:"message"`
-	details string `json:"email"`
+	Code    string `json:"code"`
+	Message string `json:"message"`
+	Details string `json:"details"`
 }
 
 // GetLeads gets all leads.
-// swagger:route GET /leads leads getLeads
+// swagger:route GET /lead leads getLeads
 //
 // Responses:
 //
@@ -52,7 +52,7 @@ func GetLeads(c *fiber.Ctx) error {
 }
 
 // GetLead gets a lead by ID.
-// swagger:route GET /leads/{id} leads getLead
+// swagger:route GET /lead/{id} leads getLead
 //
 // Responses:
 //
@@ -68,7 +68,7 @@ func GetLead(c *fiber.Ctx) error {
 }
 
 // NewLead creates a new lead.
-// swagger:route POST /leads leads newLead
+// swagger:route POST /lead leads newLead
 //
 // Responses:
 //
@@ -88,7 +88,7 @@ func NewLead(c *fiber.Ctx) error {
 }
 
 // DeleteLead deletes a lead by ID.
-// swagger:route DELETE /leads/{id} leads deleteLead
+// swagger:route DELETE /lead/{id} leads deleteLead
 //
 // Responses:
 //
