@@ -3,7 +3,7 @@ package model
 import (
 	"log"
 
-	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/app/database"
+	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/platform/database"
 	"github.com/gofiber/fiber/v2"
 	"github.com/jinzhu/gorm"
 )

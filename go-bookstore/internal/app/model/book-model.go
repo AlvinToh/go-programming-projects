@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/config"
+	config "github.com/alvintoh/go-programming-projects/go-bookstore/internal/platform/database"
 
 	"github.com/jinzhu/gorm"
 )
@@ -21,25 +21,25 @@ func init() {
 	db.AutoMigrate(&Book{})
 }
 
-func (b *Book) CreateBook() *Book {
+var CreateBook = func(b *Book) *Book {
 	db.NewRecord(b)
 	db.Create(&b)
 	return b
 }
 
-func GetAllBooks() []Book {
+var GetAllBooks = func() []Book {
 	var Books []Book
 	db.Find(&Books)
 	return Books
 }
 
-func GetBookById(Id int64) (*Book, *gorm.DB) {
+var GetBookById = func(Id int64) (*Book, *gorm.DB) {
 	var getBook Book
 	db := db.Where("ID=?", Id).Find(&getBook)
 	return &getBook, db
 }
 
-func DeleteBook(ID int64) Book {
+var DeleteBook = func(ID int64) Book {
 	var book Book
 	db.Where("ID=?", ID).Delete(book)
 	return book

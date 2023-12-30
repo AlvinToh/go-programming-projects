@@ -4,26 +4,29 @@ services:
 
   postgres:
     image: postgres:14
+    restart: always
     profiles:
-      - databases
+      - sql-db
     ports:
       - "5432:5432"
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root_pwd
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d/
     deploy:
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.5"
           memory: 256M
-    volumes:
-      - ./postgres:/docker-entrypoint-initdb.d/
-
+  
+  # ui for postgres
   pgadmin:
     image: dpage/pgadmin4
+    restart: always
     profiles:
-      - databases
+      - sql-db
     ports:
       - "5050:80"
     environment:
@@ -32,15 +35,52 @@ services:
     depends_on:
       - postgres
 
-  redis:
+  mongo:
+    image: mongo
+    restart: always
     profiles:
-      - databases
+      - nosql-db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - ./mongo:/docker-entrypoint-initdb.d/
+
+  # ui for mongo
+  mongo-express:
+    image: mongo-express
+    restart: always
+    profiles:
+      - nosql-db
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_MONGODB_DATABASE: admin
+    depends_on:
+      - mongo
+
+  # external in-memory cache
+  redis:
     image: redis:alpine
+    restart: always
+    profiles:
+      - sql-db
+      - nosql-db
+    ports:
+      - "6379:6379"
     deploy:
       resources:
         limits:
           cpus: "0.1"
           memory: 64M
     command: redis-server --requirepass local-redis-pass
-    ports:
-      - "6379:6379"

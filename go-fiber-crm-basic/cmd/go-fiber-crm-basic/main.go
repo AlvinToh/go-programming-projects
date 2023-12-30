@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/app/database"
 	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/app/model"
 	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/app/route"
+	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/platform/database"
 	"github.com/gofiber/fiber/v2"
 )
 

@@ -1,0 +1,175 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/books": {
+      "get": {
+        "description": "This will get the details of all books.",
+        "tags": [
+          "books"
+        ],
+        "summary": "Get Books",
+        "operationId": "getBooks",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/booksResponse"
+          }
+        }
+      },
+      "post": {
+        "description": "This will create a new book.",
+        "tags": [
+          "books"
+        ],
+        "summary": "Create Book",
+        "operationId": "createBook",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/bookResponse"
+          }
+        }
+      }
+    },
+    "/books/{bookId}": {
+      "get": {
+        "description": "This will get the details of a book by id.",
+        "tags": [
+          "books"
+        ],
+        "summary": "Get Book By Id",
+        "operationId": "getBookById",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "BookID",
+            "description": "The id of the book",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/bookResponse"
+          }
+        }
+      },
+      "put": {
+        "description": "This will update a book by id.",
+        "tags": [
+          "books"
+        ],
+        "summary": "Update Book",
+        "operationId": "updateBook",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "BookID",
+            "description": "The id of the book",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/bookResponse"
+          }
+        }
+      },
+      "delete": {
+        "description": "This will delete a book by id.",
+        "tags": [
+          "books"
+        ],
+        "summary": "Delete Book",
+        "operationId": "deleteBook",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "BookID",
+            "description": "The id of the book",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/bookResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "DeletedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ID": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "author": {
+          "type": "string",
+          "x-go-name": "Author"
+        },
+        "publication": {
+          "type": "string",
+          "x-go-name": "Publication"
+        }
+      },
+      "x-go-package": "github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/model"
+    }
+  },
+  "responses": {
+    "bookResponse": {
+      "description": "BookResponse is the response object for book API",
+      "schema": {
+        "$ref": "#/definitions/Book"
+      }
+    },
+    "booksResponse": {
+      "description": "BooksResponse is the response object for books API",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Book"
+        }
+      }
+    }
+  }
+}
