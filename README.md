@@ -1,80 +1,56 @@
-# go-programming-projects
+# Go Programming Projects
 
 ## Introduction
 
-This repository contains resources for learning Go Programming through building projects.
+This repository provides resources for learning Go through project building.
 
-## Sql Databases
+## Setup
 
-To run the sql-db-stack services:
+### SQL Databases
 
-```
-[x86 machines]
-docker-compose -p sql-db-stack -f deployment/docker-compose/docker-compose-x86.yml --profile sql-db up -d
-```
+1. Run the sql-db-stack services:
+    ```bash
+    docker-compose -p sql-db-stack -f deployment/docker-compose/docker-compose-x86.yml --profile sql-db up -d
+    ```
+2. Login to pgadmin4 at `localhost:5050` (Email: `pgadmin4@pgadmin.org`, Password: `admin`)
+3. Create connection to existing postgres database inside docker network with docker service name:
+    - Name: `sql-db-stack`
+    - Host: `postgres`
 
-Login to pgadmin4
-```
-localhost:5050
-Email: pgadmin4@pgadmin.org
-Password: admin
-```
+### NoSQL Databases
 
-Create connection to existing postgres database inside docker network with docker service name
-```
-Name: sql-db-stack
-Host: postgres
-```
+1. Run the nosql-db-stack services:
+    ```bash
+    docker-compose -p nosql-db-stack -f deployment/docker-compose/docker-compose-x86.yml --profile nosql-db up -d
+    ```
+2. Login to mongo-express at `localhost:8081` (User: `admin`, Password: `pass`)
 
-### Nosql Databases
-To run the nosql-db-stack services:
+Note: Mongo databases are created automatically when there is data inserted.
 
-```
-[x86 machines]
-docker-compose -p nosql-db-stack -f deployment/docker-compose/docker-compose-x86.yml --profile nosql-db up -d
-```
+## Usage
 
-Login to mongo-express
-```
-localhost:8081
-User: admin
-Password: pass
-```
+Ensure Go version `1.21.3` is installed. 
 
-Mongo databases are created automatically when there is data inserted
+1. Create a new service module directory:
+    ```bash
+    go mod init github.com/XXX
+    ```
+2. Clone `go-bookstore` or `go-fiber-crm-basic` as a template.
+3. Update `application.yml` and `application-deploy.yml` under `service-name/resource`.
 
-## Run Commands:
-Ensure the go version installed is
+### Commands
 
-```
-1.21.3
-```
+- `make build`
+- `make run`
+- `make test`
+- `make coverage`
+- `make clean`
+- `make deploy`
+- `make destroy`
 
-Change directory into module directory e.g go-bookstore for the following go commands
-```
-go mod init github.com/XXX
+### Lambda YT Example
 
-make build
+Invoke API: 
 
-make run
-
-make test
-
-make coverage
-
-make clean
-```
-
-lambda-yt-example - Invoke api 
-
-```
+```bash
 aws lambda invoke --function-name lambda-yt-example --cli-binary-format raw-in-base64-out --payload '{\"What is your name?\": \"Jim\",\"How old are you?\": 33}' output.txt
-```
-
-go-fiber-crm-basic - Generate swagger json and be displayed by swagger/ui/swagger-initializer.js
-```
-Navigate to http://localhost:3000/swagger/ui/index.html#/ to view your generated swagger ui documentation
-```
-
-## Tutorial Resources:
-* **[freeCodeCamp](https://www.freecodecamp.org/news/learn-go-by-building-11-projects/)**
