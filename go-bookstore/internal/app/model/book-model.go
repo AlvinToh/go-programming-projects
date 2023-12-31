@@ -1,46 +1,48 @@
 package model
 
 import (
-	config "github.com/alvintoh/go-programming-projects/go-bookstore/internal/platform/database"
-
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB
 
 type Book struct {
 	gorm.Model
-	Name        string `gorm:"name"`
+	Name        string `json:"name"`
 	Author      string `json:"author"`
 	Publication string `json:"publication"`
 }
 
-func init() {
-	config.Connect()
-	db = config.GetDB()
-	db.AutoMigrate(&Book{})
+func GetDB() *gorm.DB {
+	return db
 }
 
-var CreateBook = func(b *Book) *Book {
-	db.NewRecord(b)
-	db.Create(&b)
-	return b
+func SetDB(database *gorm.DB) {
+	db = database
 }
 
-var GetAllBooks = func() []Book {
+func (b *Book) CreateBook() (*Book, error) {
+	if err := db.Create(b).Error; err != nil {
+		return nil, err
+	}
+	return b, nil
+}
+
+func GetAllBooks() ([]Book, error) {
 	var Books []Book
 	db.Find(&Books)
-	return Books
+	return Books, nil
 }
 
-var GetBookById = func(Id int64) (*Book, *gorm.DB) {
+func GetBookById(Id int64) (*Book, *gorm.DB) {
 	var getBook Book
 	db := db.Where("ID=?", Id).Find(&getBook)
 	return &getBook, db
 }
 
-var DeleteBook = func(ID int64) Book {
-	var book Book
-	db.Where("ID=?", ID).Delete(book)
-	return book
+func DeleteBook(id int64) error {
+	if err := db.Delete(&Book{}, id).Error; err != nil {
+		return err
+	}
+	return nil
 }

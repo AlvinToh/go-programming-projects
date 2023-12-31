@@ -1,0 +1,12 @@
+service:
+  host: localhost
+  port: 9001
+
+database:
+  host: localhost
+  user: root
+  password: root_pwd
+  dbname: postgres
+  port: 5432
+  sslmode: disable
+  timezone: Asia/Singapore

@@ -25,10 +25,26 @@ coverage:
 	go test -coverprofile=coverage.out ./...
 	go tool cover -html=coverage.out
 
-# Current delete commands are for Windows only
+# Current delete commands for Windows only
 .PHONY: clean
 clean:
 	@echo "Cleaning Service: $(service_name)"
 	go clean
 	if exist main.exe del /F /Q main.exe
 	if exist coverage.out del /F /Q coverage.out
+
+# Deploy DockerFile with environment variables
+.PHONY: deploy
+deploy:
+	@echo "Deploying Service: $(service_name)"
+	docker build -t $(service_name):tag_release_deploy .
+	docker run --network sql-db-stack_default -d -p 9001:9001 $(service_name):tag_release_deploy
+
+# Destroy Docker service
+.PHONY: destroy
+destroy:
+	@echo "Destroying Service: $(service_name)"
+	$(eval CONTAINER_ID := $(shell docker ps -q --filter ancestor=$(service_name):tag_release_deploy))
+	docker stop $(CONTAINER_ID)
+	docker rm $(CONTAINER_ID)
+	docker rmi $(service_name):tag_release_deploy

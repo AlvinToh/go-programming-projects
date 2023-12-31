@@ -129,15 +129,11 @@
           "format": "date-time"
         },
         "DeletedAt": {
-          "type": "string",
-          "format": "date-time"
+          "$ref": "#/definitions/DeletedAt"
         },
         "ID": {
           "type": "integer",
           "format": "uint64"
-        },
-        "Name": {
-          "type": "string"
         },
         "UpdatedAt": {
           "type": "string",
@@ -147,12 +143,34 @@
           "type": "string",
           "x-go-name": "Author"
         },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
         "publication": {
           "type": "string",
           "x-go-name": "Publication"
         }
       },
       "x-go-package": "github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/model"
+    },
+    "DeletedAt": {
+      "$ref": "#/definitions/NullTime"
+    },
+    "NullTime": {
+      "description": "NullTime implements the Scanner interface so\nit can be used as a scan destination, similar to NullString.",
+      "type": "object",
+      "title": "NullTime represents a time.Time that may be null.",
+      "properties": {
+        "Time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Valid": {
+          "type": "boolean"
+        }
+      },
+      "x-go-package": "database/sql"
     }
   },
   "responses": {
