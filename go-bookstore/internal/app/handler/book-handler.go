@@ -140,7 +140,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("error while parsing")
 	}
-	bookDetails, db := model.GetBookById(ID)
+	bookDetails, _ := model.GetBookById(ID)
 	if updateBook.Name != "" {
 		bookDetails.Name = updateBook.Name
 	}
@@ -150,7 +150,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	if updateBook.Publication != "" {
 		bookDetails.Publication = updateBook.Publication
 	}
-	db.Save(&bookDetails)
+	model.GetDB().Save(&bookDetails)
 	res, _ := json.Marshal(bookDetails)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

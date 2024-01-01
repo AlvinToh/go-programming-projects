@@ -1,0 +1,12 @@
+service:
+  host: 0.0.0.0
+  port: 3000
+
+database:
+  host: postgres
+  user: root
+  password: root_pwd
+  dbname: postgres
+  port: 5432
+  sslmode: disable
+  timezone: Asia/Singapore

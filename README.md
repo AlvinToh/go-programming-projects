@@ -35,10 +35,15 @@ Ensure Go version `1.21.3` is installed.
     ```bash
     go mod init github.com/XXX
     ```
-2. Clone `go-bookstore` or `go-fiber-crm-basic` as a template.
+2. Clone one of the following service directories to use as a go service template:
+    - `go-bookstore`
+    - `go-fiber-crm-basic`
+
 3. Update `application.yml` and `application-deploy.yml` under `service-name/resource`.
 
 ### Commands
+
+Under service-name/Makefile can use the following commands
 
 - `make build`
 - `make run`

@@ -23,6 +23,7 @@ func init() {
 func setupConfig() {
 	viper.SetConfigName("application")
 	viper.AddConfigPath("./resource")
+	// use for development debug reference path
 	viper.AddConfigPath("../../resource")
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -54,7 +55,7 @@ func main() {
 func setupRoutes(r *mux.Router) {
 	r.PathPrefix("/swagger/ui/").Handler(http.StripPrefix("/swagger/ui/", http.FileServer(http.Dir("./swagger/ui"))))
 	r.PathPrefix("/swagger/").Handler(http.StripPrefix("/swagger/", http.FileServer(http.Dir("./swagger"))))
-	r.Use(middleware.LoggingMiddleware)
+	r.Use(middleware.HttpLoggingMiddleware)
 	route.RegisterBookStoreRoutes(r)
 	http.Handle("/", r)
 }

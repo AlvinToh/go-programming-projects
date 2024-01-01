@@ -34,10 +34,12 @@ func GetAllBooks() ([]Book, error) {
 	return Books, nil
 }
 
-func GetBookById(Id int64) (*Book, *gorm.DB) {
+func GetBookById(Id int64) (*Book, error) {
 	var getBook Book
-	db := db.Where("ID=?", Id).Find(&getBook)
-	return &getBook, db
+	if err := db.Where("ID=?", Id).First(&getBook).Error; err != nil {
+		return nil, err
+	}
+	return &getBook, nil
 }
 
 func DeleteBook(id int64) error {

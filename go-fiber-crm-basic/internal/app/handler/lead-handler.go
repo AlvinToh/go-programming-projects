@@ -1,32 +1,23 @@
-package model
+package handler
 
 import (
 	"log"
+	"strconv"
 
-	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/platform/database"
+	"github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/app/model"
 	"github.com/gofiber/fiber/v2"
-	"github.com/jinzhu/gorm"
 )
-
-// swagger:parameters lead
-type Lead struct {
-	gorm.Model
-	Name    string `json:"name"`
-	Company string `json:"company"`
-	Email   string `json:"email"`
-	Phone   int    `json:"phone"`
-}
 
 // swagger:response leadsResponse
 type leadsResponseWrapper struct {
 	// in:body
-	Body []Lead
+	Body []model.Lead
 }
 
 // swagger:response leadResponse
 type leadResponseWrapper struct {
 	// in:body
-	Body Lead
+	Body model.Lead
 }
 
 // swagger:response genericError
@@ -44,10 +35,8 @@ type genericErrorWrapper struct {
 //	default: genericError
 //	200: leadsResponse
 func GetLeads(c *fiber.Ctx) error {
-	db := database.DBConn
-	var leads []Lead
-	db.Find(&leads)
-	log.Printf("Get Leads: %v\n", leads)
+	var leads []model.Lead
+	leads, _ = model.GetAllLeads()
 	return c.JSON(leads)
 }
 
@@ -60,10 +49,8 @@ func GetLeads(c *fiber.Ctx) error {
 //	200: leadResponse
 func GetLead(c *fiber.Ctx) error {
 	id := c.Params("id")
-	db := database.DBConn
-	var lead Lead
-	db.Find(&lead, id)
-	log.Printf("Get Lead for id: %v %v\n", id, lead)
+	leadID, _ := strconv.ParseInt(id, 0, 0)
+	lead, _ := model.GetLeadById(leadID)
 	return c.JSON(lead)
 }
 
@@ -75,15 +62,13 @@ func GetLead(c *fiber.Ctx) error {
 //	default: genericError
 //	200: leadResponse
 func NewLead(c *fiber.Ctx) error {
-	db := database.DBConn
-	lead := new(Lead)
+	lead := new(model.Lead)
 	if err := c.BodyParser(lead); err != nil {
 		log.Printf("New Lead error: %v\n", err)
 		c.Status(503).SendString(err.Error())
 		return err
 	}
-	db.Create(&lead)
-	log.Printf("New Lead: %v\n", lead)
+	lead.CreateLead()
 	return c.JSON(lead)
 }
 
@@ -96,16 +81,7 @@ func NewLead(c *fiber.Ctx) error {
 //	200: leadResponse
 func DeleteLead(c *fiber.Ctx) error {
 	id := c.Params("id")
-	db := database.DBConn
-
-	var lead Lead
-	db.First(&lead, id)
-	if lead.Name == "" {
-		log.Printf("Delete Lead error: No lead found with ID %v\n", id)
-		c.Status(500).Send([]byte("No lead found with ID"))
-		return nil
-	}
-	db.Delete(&lead)
-	log.Printf("Delete Lead: %v\n", lead)
-	return c.Send([]byte("Lead deleted successfully"))
+	leadID, _ := strconv.ParseInt(id, 0, 0)
+	_ = model.DeleteLead(leadID)
+	return c.JSON(fiber.Map{"message": "Lead deleted successfully"})
 }

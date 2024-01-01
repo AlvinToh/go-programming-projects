@@ -3,19 +3,32 @@ package database
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/spf13/viper"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 var (
-	DBConn *gorm.DB
+	db *gorm.DB
 )
 
-func InitDatabase() {
-	var err error
-	DBConn, err = gorm.Open("postgres", "host=localhost port=5432 user=root dbname=postgres password=root_pwd sslmode=disable")
+func Connect() {
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
+		viper.GetString("database.host"),
+		viper.GetString("database.user"),
+		viper.GetString("database.password"),
+		viper.GetString("database.dbname"),
+		viper.GetString("database.port"),
+		viper.GetString("database.sslmode"),
+		viper.GetString("database.timezone"),
+	)
+	d, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		panic("Failed to connect to database: " + err.Error())
 	}
-	fmt.Println("Connection opened to database")
+	db = d
+}
+
+func GetDB() *gorm.DB {
+	return db
 }

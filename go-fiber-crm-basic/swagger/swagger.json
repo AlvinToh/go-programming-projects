@@ -63,6 +63,9 @@
     }
   },
   "definitions": {
+    "DeletedAt": {
+      "$ref": "#/definitions/NullTime"
+    },
     "Lead": {
       "type": "object",
       "properties": {
@@ -71,8 +74,7 @@
           "format": "date-time"
         },
         "DeletedAt": {
-          "type": "string",
-          "format": "date-time"
+          "$ref": "#/definitions/DeletedAt"
         },
         "ID": {
           "type": "integer",
@@ -95,12 +97,26 @@
           "x-go-name": "Name"
         },
         "phone": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
           "x-go-name": "Phone"
         }
       },
       "x-go-package": "github.com/alvintoh/go-programming-projects/go-fiber-crm-basic/internal/app/model"
+    },
+    "NullTime": {
+      "description": "NullTime implements the Scanner interface so\nit can be used as a scan destination, similar to NullString.",
+      "type": "object",
+      "title": "NullTime represents a time.Time that may be null.",
+      "properties": {
+        "Time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Valid": {
+          "type": "boolean"
+        }
+      },
+      "x-go-package": "database/sql"
     }
   },
   "responses": {

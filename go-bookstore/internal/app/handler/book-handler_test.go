@@ -14,7 +14,7 @@ import (
 	"github.com/alvintoh/go-programming-projects/go-bookstore/internal/app/model"
 )
 
-func setup(t *testing.T) (*gorm.DB, sqlmock.Sqlmock, func()) {
+func setup(t *testing.T) (sqlmock.Sqlmock, func()) {
 	// Create a sqlmock database connection
 	db, mock, err := sqlmock.New()
 	require.NoError(t, err)
@@ -30,14 +30,14 @@ func setup(t *testing.T) (*gorm.DB, sqlmock.Sqlmock, func()) {
 	model.SetDB(gormDB)
 
 	// Return the mock and a function that restores the original datastore and closes the database when defer teardown is called
-	return gormDB, mock, func() {
+	return mock, func() {
 		model.SetDB(originalDB)
 		db.Close()
 	}
 }
 
 func TestGetAllBooks(t *testing.T) {
-	_, mock, teardown := setup(t)
+	mock, teardown := setup(t)
 	defer teardown()
 
 	// Set up the mock to return a single book when GetAllBooks is called

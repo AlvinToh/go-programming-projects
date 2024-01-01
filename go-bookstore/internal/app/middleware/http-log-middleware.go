@@ -30,7 +30,7 @@ func (lrw *loggingResponseWriter) Write(b []byte) (int, error) {
 	return size, err
 }
 
-func LoggingMiddleware(next http.Handler) http.Handler {
+func HttpLoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		lrw := &loggingResponseWriter{ResponseWriter: w}
 		log.Println("Request:", r.Method, r.RequestURI)
