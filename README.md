@@ -71,7 +71,7 @@ Remember to reopen PowerShell after each installation to ensure changes take eff
     docker-compose -p nosql-db-stack -f deployment/docker-compose/docker-compose-x86.yml --profile nosql-db up -d
     ```
 
-2. Login to Mongo Express at `localhost:8081` (User: `admin`, Password: `password`).
+2. Login to Mongo Express at `localhost:8081` (User: `admin`, Password: `pass`).
 
 Note: Mongo databases are created automatically when data is inserted.
 
