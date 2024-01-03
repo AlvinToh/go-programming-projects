@@ -38,7 +38,7 @@ clean:
 deploy:
 	@echo "Deploying Service: $(service_name)"
 	docker build --build-arg SERVICE_NAME=$(service_name) -t $(service_name):tag_release_deploy .
-	docker run --name $(service_name) --network sql-db-stack_default -d -p 9001:9001 $(service_name):tag_release_deploy
+	docker run --name $(service_name) --network nosql-db-stack_default -d -p 3001:3001 $(service_name):tag_release_deploy
 
 # Destroy Docker service
 .PHONY: destroy

@@ -33,7 +33,7 @@ clean:
 	if exist main.exe del /F /Q main.exe
 	if exist coverage.out del /F /Q coverage.out
 
-# Deploy DockerFile with environment variables
+# Deploy DockerFile with environment variables, and modify network and ports as required
 .PHONY: deploy
 deploy:
 	@echo "Deploying Service: $(service_name)"

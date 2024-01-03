@@ -1,0 +1,130 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/employee": {
+      "get": {
+        "tags": [
+          "employees"
+        ],
+        "operationId": "getEmployees",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/employeesResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "employees"
+        ],
+        "operationId": "newEmployee",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/employeeResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      }
+    },
+    "/employee/{id}": {
+      "get": {
+        "tags": [
+          "employees"
+        ],
+        "operationId": "getEmployee",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/employeeResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "employees"
+        ],
+        "operationId": "updateEmployee",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/employeeResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "employees"
+        ],
+        "operationId": "deleteEmployee",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/employeeResponse"
+          },
+          "default": {
+            "$ref": "#/responses/genericError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Employee": {
+      "type": "object",
+      "properties": {
+        "Age": {
+          "type": "string"
+        },
+        "ID": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Salary": {
+          "type": "string"
+        }
+      },
+      "x-go-package": "github.com/alvintoh/go-programming-projects/go-fiber-mongo-hrms/internal/app/model"
+    }
+  },
+  "responses": {
+    "employeeResponse": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/Employee"
+      }
+    },
+    "employeesResponse": {
+      "description": "",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Employee"
+        }
+      }
+    },
+    "genericError": {
+      "description": "",
+      "headers": {
+        "code": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
