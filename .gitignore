@@ -4,3 +4,4 @@ go.work.sum
 bin/
 **/vendor/
 *.out
+go-serverless-yt/cmd/go-serverless-yt/bootstrap

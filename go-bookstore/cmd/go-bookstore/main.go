@@ -15,11 +15,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-func init() {
-	setupConfig()
-	connectDatabase()
-}
-
 func setupConfig() {
 	viper.SetConfigName("application")
 	viper.AddConfigPath("./resource")
@@ -46,12 +41,6 @@ func connectDatabase() {
 	}
 }
 
-func main() {
-	r := mux.NewRouter()
-	setupRoutes(r)
-	startServer(r)
-}
-
 func setupRoutes(r *mux.Router) {
 	r.PathPrefix("/swagger/ui/").Handler(http.StripPrefix("/swagger/ui/", http.FileServer(http.Dir("./swagger/ui"))))
 	r.PathPrefix("/swagger/").Handler(http.StripPrefix("/swagger/", http.FileServer(http.Dir("./swagger"))))
@@ -72,4 +61,12 @@ func startServer(r *mux.Router) {
 	}
 
 	log.Fatal(server.ListenAndServe())
+}
+
+func main() {
+	setupConfig()
+	connectDatabase()
+	r := mux.NewRouter()
+	setupRoutes(r)
+	startServer(r)
 }

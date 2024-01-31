@@ -14,11 +14,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-func init() {
-	setupConfig()
-	connectDatabase()
-}
-
 func setupConfig() {
 	viper.SetConfigName("application")
 	viper.AddConfigPath("./resource")
@@ -45,15 +40,6 @@ func connectDatabase() {
 	}
 }
 
-func main() {
-	app := fiber.New(fiber.Config{
-		ReadTimeout:  15 * time.Second,
-		WriteTimeout: 15 * time.Second,
-	})
-	setupRoutes(app)
-	startServer(app)
-}
-
 func setupRoutes(app *fiber.App) {
 	app.Static("/swagger/ui", "./swagger/ui")
 	app.Static("/swagger", "./swagger")
@@ -65,4 +51,15 @@ func startServer(app *fiber.App) {
 	addr := viper.GetString("service.host") + ":" + viper.GetString("service.port")
 	log.Println("Starting server at " + addr)
 	log.Fatal(app.Listen(addr))
+}
+
+func main() {
+	setupConfig()
+	connectDatabase()
+	app := fiber.New(fiber.Config{
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 15 * time.Second,
+	})
+	setupRoutes(app)
+	startServer(app)
 }

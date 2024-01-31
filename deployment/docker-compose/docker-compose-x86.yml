@@ -2,11 +2,25 @@ version: "3.8"
 
 services:
 
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 64M
+    command: redis-server --requirepass local-redis-pass
+    networks:
+      - go-programming-network
+
   postgres:
     image: postgres:14
     restart: always
     profiles:
-      - sql-db
+      - sql_database
     ports:
       - "5432:5432"
     environment:
@@ -20,13 +34,15 @@ services:
         limits:
           cpus: "0.5"
           memory: 256M
+    networks:
+      - go-programming-network
   
   # ui for postgres
   pgadmin:
     image: dpage/pgadmin4
     restart: always
     profiles:
-      - sql-db
+      - sql_database
     ports:
       - "5050:80"
     environment:
@@ -34,12 +50,14 @@ services:
       PGADMIN_DEFAULT_PASSWORD: 'admin'
     depends_on:
       - postgres
+    networks:
+      - go-programming-network
 
   mongo:
     image: mongo
     restart: always
     profiles:
-      - nosql-db
+      - nosql_database
     ports:
       - "27017:27017"
     environment:
@@ -52,13 +70,15 @@ services:
           memory: 256M
     volumes:
       - ./mongo:/docker-entrypoint-initdb.d/
+    networks:
+      - go-programming-network
 
   # ui for mongo
   mongo-express:
     image: mongo-express
     restart: always
     profiles:
-      - nosql-db
+      - nosql_database
     ports:
       - "8081:8081"
     environment:
@@ -68,19 +88,10 @@ services:
       ME_CONFIG_MONGODB_DATABASE: mongo
     depends_on:
       - mongo
+    networks:
+      - go-programming-network
 
-  # external in-memory cache
-  redis:
-    image: redis:alpine
-    restart: always
-    profiles:
-      - sql-db
-      - nosql-db
-    ports:
-      - "6379:6379"
-    deploy:
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: 64M
-    command: redis-server --requirepass local-redis-pass
+networks:
+  go-programming-network:
+    driver: bridge
+    name: go-programming-network

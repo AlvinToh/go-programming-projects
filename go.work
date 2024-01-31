@@ -10,4 +10,5 @@ use (
 	./slack-file-bot
 	./go-fiber-crm-basic
 	./go-fiber-mongo-hrms
+	./go-serverless-yt
 )
