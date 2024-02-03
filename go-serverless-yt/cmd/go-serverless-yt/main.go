@@ -19,7 +19,7 @@ var (
 
 const tableName = "go-serverless-yt"
 
-func handlerRoutes(req events.APIGatewayHTTPRequest) (*events.APIGatewayProxyResponse, error) {
+func handlerRoutes(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	switch req.HTTPMethod {
 	case "GET":
 		return handler.GetUser(req, tableName, dynaClient)

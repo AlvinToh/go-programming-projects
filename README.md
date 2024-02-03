@@ -85,9 +85,10 @@ Ensure Go version `1.21.3` is installed.
     go mod init github.com/your_username/your_repository
     ```
 
-2. Clone one of the following service directories to use as a Go service template for web application:
+2. Clone one of the following service directories to use as a Go service recommended template for web application:
 1. Go Standard Library
     - `go-bookstore`
+    - `go-serverless-yt`
 2. Go Fiber
     - `go-fiber-crm-basic`
     - `go-fiber-mongo-hrms`
@@ -96,7 +97,7 @@ Ensure Go version `1.21.3` is installed.
 
 ### Commands
 
-You can use the following commands under `service-name/Makefile`:
+You can use the following commands under `service-name/Makefile` for the recommended web applications templates above:
 
 - `make build`
 - `make run`
@@ -116,7 +117,6 @@ aws lambda invoke --function-name lambda-yt-example --cli-binary-format raw-in-b
 
 ### Serverless YT Example
 
-Invoke API:
-
-```bash
-aws lambda invoke --function-name lambda-yt-example --cli-binary-format raw-in-base64-out --payload '{\"What is your name?\": \"Jim\",\"How old are you?\": 33}' output.txt
+Documentation:
+- Prepare zip file to deploy to AWS Lambda
+[AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/latest/dg/golang-package.html)

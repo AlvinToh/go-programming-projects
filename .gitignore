@@ -5,3 +5,4 @@ bin/
 **/vendor/
 *.out
 go-serverless-yt/cmd/go-serverless-yt/bootstrap
+youtube-demo-nlp/cmd/youtube-demo-nlp/.env
